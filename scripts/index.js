@@ -31,7 +31,7 @@ function addCard(name, url) {
   cardImage.addEventListener("click", () => {
     imagePopup.querySelector(".popup__image").src = url;
     imagePopup.querySelector(".popup__caption").textContent = name;
-    
+
     togglePopup(".popup_type_image");
   });
 
@@ -72,8 +72,18 @@ initialCards.forEach((item) => addCard(item.name, item.link));
 editPopup = document.querySelector(".popup_type_edit");
 editPopup.classList.add("popup_is-animated");
 
+const nameInput = editPopup.querySelector(".popup__input_type_name");
+const descriptionInput = editPopup.querySelector(
+  ".popup__input_type_description"
+);
+
 editProfileButton = document.querySelector(".profile__edit-button");
 editProfileButton.addEventListener("click", () => {
+  nameInput.value = document.querySelector(".profile__title").textContent;
+  descriptionInput.value = document.querySelector(
+    ".profile__description"
+  ).textContent;
+
   togglePopup(".popup_type_edit");
 });
 
@@ -81,16 +91,6 @@ const closeEditButton = editPopup.querySelector(".popup__close");
 closeEditButton.addEventListener("click", () => {
   togglePopup(".popup_type_edit");
 });
-
-const inputInput = editPopup.querySelector(".popup__input_type_name");
-inputInput.value = document.querySelector(".profile__title").textContent;
-
-const descriptionInput = editPopup.querySelector(
-  ".popup__input_type_description"
-);
-descriptionInput.value = document.querySelector(
-  ".profile__description"
-).textContent;
 
 const submitEditButton = editPopup.querySelector(".popup__button");
 submitEditButton.addEventListener("click", (event) => {
@@ -145,4 +145,3 @@ const closeImageButton = imagePopup.querySelector(".popup__close");
 closeImageButton.addEventListener("click", () => {
   togglePopup(".popup_type_image");
 });
-
