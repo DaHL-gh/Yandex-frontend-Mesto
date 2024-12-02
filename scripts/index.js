@@ -27,6 +27,14 @@ function addCard(name, url) {
     deleteButton.closest(".card").remove();
   });
 
+  const cardImage = cardElement.querySelector(".card__image");
+  cardImage.addEventListener("click", () => {
+    imagePopup.querySelector(".popup__image").src = url;
+    imagePopup.querySelector(".popup__caption").textContent = name;
+    
+    togglePopup(".popup_type_image");
+  });
+
   placesList.append(cardElement);
 }
 
@@ -62,6 +70,7 @@ initialCards.forEach((item) => addCard(item.name, item.link));
 // -------------------------- EDIT POP-UP -------------------------------
 
 editPopup = document.querySelector(".popup_type_edit");
+editPopup.classList.add("popup_is-animated");
 
 editProfileButton = document.querySelector(".profile__edit-button");
 editProfileButton.addEventListener("click", () => {
@@ -97,7 +106,8 @@ submitEditButton.addEventListener("click", (event) => {
 });
 
 // -------------------------- ADD POP-UP -------------------------------
-addPopup = document.querySelector(".popup_type_new-card");
+const addPopup = document.querySelector(".popup_type_new-card");
+addPopup.classList.add("popup_is-animated");
 
 addProfileButton = document.querySelector(".profile__add-button");
 addProfileButton.addEventListener("click", () => {
@@ -125,3 +135,14 @@ submitAddButton.addEventListener("click", (event) => {
     togglePopup(".popup_type_new-card");
   }
 });
+
+// -------------------------- IMAGE POPUP -------------------------------
+
+const imagePopup = document.querySelector(".popup_type_image");
+imagePopup.classList.add("popup_is-animated");
+
+const closeImageButton = imagePopup.querySelector(".popup__close");
+closeImageButton.addEventListener("click", () => {
+  togglePopup(".popup_type_image");
+});
+
