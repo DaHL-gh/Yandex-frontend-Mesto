@@ -17,6 +17,16 @@ function addCard(name, url) {
   cardElement.querySelector(".card__image").src = url;
   cardElement.querySelector(".card__title").textContent = name;
 
+  const likeButton = cardElement.querySelector(".card__like-button");
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_is-active");
+  });
+
+  const deleteButton = cardElement.querySelector(".card__delete-button");
+  deleteButton.addEventListener("click", () => {
+    deleteButton.closest(".card").remove();
+  });
+
   placesList.append(cardElement);
 }
 
@@ -47,7 +57,7 @@ const initialCards = [
   },
 ];
 
-initialCards.forEach(item => addCard(item.name, item.link));
+initialCards.forEach((item) => addCard(item.name, item.link));
 
 // -------------------------- EDIT POP-UP -------------------------------
 
