@@ -14,10 +14,17 @@ function togglePopup(popupClass) {
 
 // ------------------------------ CARD ----------------------------------
 
+const placesList = document.querySelector(".places__list");
+
 function addCard(name, url) {
+  const template = document.querySelector("#card-template").content;
+  const cardElement = template.cloneNode(true);
 
+  cardElement.querySelector(".card__image").src = url;
+  cardElement.querySelector(".card__title").textContent = name;
+
+  placesList.append(cardElement);
 }
-
 
 // -------------------------- EDIT POP-UP -------------------------------
 
