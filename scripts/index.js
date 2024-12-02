@@ -14,22 +14,23 @@ function addCard(name, url) {
   const template = document.querySelector("#card-template").content;
   const cardElement = template.cloneNode(true);
 
-  cardElement.querySelector(".card__image").src = url;
+  const likeButton = cardElement.querySelector(".card__like-button");
+  const deleteButton = cardElement.querySelector(".card__delete-button");
+  const cardImage = cardElement.querySelector(".card__image");
+
+  cardImage.src = url;
   cardElement.querySelector(".card__title").textContent = name;
 
-  const likeButton = cardElement.querySelector(".card__like-button");
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_is-active");
   });
 
-  const deleteButton = cardElement.querySelector(".card__delete-button");
   deleteButton.addEventListener("click", () => {
     deleteButton.closest(".card").remove();
   });
 
-  const cardImage = cardElement.querySelector(".card__image");
   cardImage.addEventListener("click", () => {
-    imagePopup.querySelector(".popup__image").src = url;
+    cardImage.src = url;
     imagePopup.querySelector(".popup__caption").textContent = name;
 
     togglePopup(".popup_type_image");
@@ -94,10 +95,10 @@ closeEditButton.addEventListener("click", () => {
 
 const submitEditButton = editPopup.querySelector(".popup__button");
 submitEditButton.addEventListener("click", (event) => {
-  if (!!inputInput.value && !!descriptionInput.value) {
+  if (!!nameInput.value && !!descriptionInput.value) {
     event.preventDefault();
 
-    document.querySelector(".profile__title").textContent = inputInput.value;
+    document.querySelector(".profile__title").textContent = nameInput.value;
     document.querySelector(".profile__description").textContent =
       descriptionInput.value;
 
