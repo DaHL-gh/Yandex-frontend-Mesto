@@ -12,6 +12,13 @@ function togglePopup(popupClass) {
   document.querySelector(popupClass).classList.toggle("popup_is-opened");
 }
 
+// ------------------------------ CARD ----------------------------------
+
+function addCard(name, url) {
+
+}
+
+
 // -------------------------- EDIT POP-UP -------------------------------
 
 editPopup = document.querySelector(".popup_type_edit");
@@ -46,5 +53,35 @@ submitEditButton.addEventListener("click", (event) => {
       descriptionInput.value;
 
     togglePopup(".popup_type_edit");
+  }
+});
+
+// -------------------------- ADD POP-UP -------------------------------
+addPopup = document.querySelector(".popup_type_new-card");
+
+addProfileButton = document.querySelector(".profile__add-button");
+addProfileButton.addEventListener("click", () => {
+  togglePopup(".popup_type_new-card");
+});
+
+const closeAddButton = addPopup.querySelector(".popup__close");
+closeAddButton.addEventListener("click", () => {
+  togglePopup(".popup_type_new-card");
+});
+
+const submitAddButton = addPopup.querySelector(".popup__button");
+submitAddButton.addEventListener("click", (event) => {
+  cardNameInput = addPopup.querySelector(".popup__input_type_card-name");
+  urlInput = addPopup.querySelector(".popup__input_type_url");
+
+  if (!!cardNameInput.value && !!urlInput.value) {
+    event.preventDefault();
+
+    addCard(cardNameInput.value, urlInput.value);
+
+    cardNameInput.value = "";
+    urlInput.value = "";
+
+    togglePopup(".popup_type_new-card");
   }
 });
