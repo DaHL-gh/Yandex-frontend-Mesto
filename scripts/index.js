@@ -1,7 +1,10 @@
 // ---------------------------- FUNCTIONS --------------------------------
 
 function togglePopup(popupClass) {
-  document.querySelector(popupClass).classList.toggle("popup_is-opened");
+  element = document.querySelector(popupClass)
+  if (!!element) {
+    element.classList.toggle("popup_is-opened");
+  }
 }
 
 function showInputError(inputElement, errorElement) {
@@ -31,6 +34,21 @@ function validateForm(formElement, submitButton, ...inputElements) {
     submitButton.classList.add("popup__button_disabled");
   }
 }
+
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    togglePopup(".popup_is-opened");
+  }
+}
+
+// ------------------------------ POPUPS ----------------------------------
+
+const popups = document.querySelectorAll(".popup");
+popups.forEach((element) => {
+  console.log(element)
+  document.addEventListener("keydown", closeByEsc);
+  element.classList.add("popup_is-animated");
+});
 
 // ------------------------------ CARDS ----------------------------------
 
@@ -98,7 +116,6 @@ initialCards.forEach((item) => addCard(item.name, item.link));
 
 editForm = document.forms.namedItem("edit-profile");
 editPopup = document.querySelector(".popup_type_edit");
-editPopup.classList.add("popup_is-animated");
 
 const nameInput = editForm.elements.name;
 nameInput.addEventListener("input", () => {
@@ -113,7 +130,7 @@ editProfileButton = document.querySelector(".profile__edit-button");
 editProfileButton.addEventListener("click", () => {
   nameInput.value = document.querySelector(".profile__title").textContent;
   descInput.value = document.querySelector(".profile__description").textContent;
-  validateForm(editForm, submitEditButton, nameInput, descInput)
+  validateForm(editForm, submitEditButton, nameInput, descInput);
 
   togglePopup(".popup_type_edit");
 });
@@ -137,7 +154,6 @@ submitEditButton.addEventListener("click", (event) => {
 
 addForm = document.forms.namedItem("new-place");
 const addPopup = document.querySelector(".popup_type_new-card");
-addPopup.classList.add("popup_is-animated");
 
 const cardNameInput = addForm.elements.namedItem("place-name");
 cardNameInput.addEventListener("input", () => {
@@ -164,7 +180,6 @@ addProfileButton.addEventListener("click", () => {
 
 const closeAddButton = addPopup.querySelector(".popup__close");
 closeAddButton.addEventListener("click", () => {
-
   togglePopup(".popup_type_new-card");
 });
 
@@ -183,9 +198,10 @@ submitAddButton.addEventListener("click", (event) => {
 // -------------------------- IMAGE POPUP -------------------------------
 
 const imagePopup = document.querySelector(".popup_type_image");
-imagePopup.classList.add("popup_is-animated");
 
 const closeImageButton = imagePopup.querySelector(".popup__close");
 closeImageButton.addEventListener("click", () => {
   togglePopup(".popup_type_image");
 });
+
+
