@@ -56,7 +56,7 @@ function addCard(name, url) {
   });
 
   cardImage.addEventListener("click", () => {
-    cardImage.src = url;
+    imagePopup.querySelector(".popup__image").src = url;
     imagePopup.querySelector(".popup__caption").textContent = name;
 
     togglePopup(".popup_type_image");
@@ -134,34 +134,50 @@ submitEditButton.addEventListener("click", (event) => {
 });
 
 // -------------------------- ADD POP-UP -------------------------------
+
+addForm = document.forms.namedItem("new-place");
 const addPopup = document.querySelector(".popup_type_new-card");
 addPopup.classList.add("popup_is-animated");
 
+const cardNameInput = addForm.elements.namedItem("place-name");
+cardNameInput.addEventListener("input", () => {
+  validateForm(addForm, submitAddButton, cardNameInput);
+});
+const urlInput = addForm.elements.link;
+urlInput.addEventListener("input", () => {
+  validateForm(addForm, submitAddButton, urlInput);
+});
+
 addProfileButton = document.querySelector(".profile__add-button");
 addProfileButton.addEventListener("click", () => {
+  hideInputError(cardNameInput, cardNameInput.nextElementSibling);
+  hideInputError(urlInput, urlInput.nextElementSibling);
+
+  submitAddButton.disabled = true;
+  submitAddButton.classList.add("popup__button_disabled");
+
+  cardNameInput.value = "";
+  urlInput.value = "";
+
   togglePopup(".popup_type_new-card");
 });
 
 const closeAddButton = addPopup.querySelector(".popup__close");
 closeAddButton.addEventListener("click", () => {
+
   togglePopup(".popup_type_new-card");
 });
 
-const submitAddButton = addPopup.querySelector(".popup__button");
+const submitAddButton = addForm.elements.namedItem("submit-button");
 submitAddButton.addEventListener("click", (event) => {
-  cardNameInput = addPopup.querySelector(".popup__input_type_card-name");
-  urlInput = addPopup.querySelector(".popup__input_type_url");
+  event.preventDefault();
 
-  if (!!cardNameInput.value && !!urlInput.value) {
-    event.preventDefault();
+  addCard(cardNameInput.value, urlInput.value);
 
-    addCard(cardNameInput.value, urlInput.value);
+  cardNameInput.value = "";
+  urlInput.value = "";
 
-    cardNameInput.value = "";
-    urlInput.value = "";
-
-    togglePopup(".popup_type_new-card");
-  }
+  togglePopup(".popup_type_new-card");
 });
 
 // -------------------------- IMAGE POPUP -------------------------------
