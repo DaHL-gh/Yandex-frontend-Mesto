@@ -1,7 +1,9 @@
+import "./index.css"
+
 // ---------------------------- FUNCTIONS --------------------------------
 
 function togglePopup(popupClass) {
-  element = document.querySelector(popupClass)
+  const element = document.querySelector(popupClass)
   if (!!element) {
     element.classList.toggle("popup_is-opened");
   }
@@ -120,8 +122,8 @@ initialCards.forEach((item) => addCard(item.name, item.link));
 
 // -------------------------- EDIT POP-UP -------------------------------
 
-editForm = document.forms.namedItem("edit-profile");
-editPopup = document.querySelector(".popup_type_edit");
+const editForm = document.forms.namedItem("edit-profile");
+const editPopup = document.querySelector(".popup_type_edit");
 
 const nameInput = editForm.elements.name;
 nameInput.addEventListener("input", () => {
@@ -132,7 +134,7 @@ descInput.addEventListener("input", () => {
   validateForm(editForm, submitEditButton, descInput);
 });
 
-editProfileButton = document.querySelector(".profile__edit-button");
+const editProfileButton = document.querySelector(".profile__edit-button");
 editProfileButton.addEventListener("click", () => {
   nameInput.value = document.querySelector(".profile__title").textContent;
   descInput.value = document.querySelector(".profile__description").textContent;
@@ -158,7 +160,7 @@ submitEditButton.addEventListener("click", (event) => {
 
 // -------------------------- ADD POP-UP -------------------------------
 
-addForm = document.forms.namedItem("new-place");
+const addForm = document.forms.namedItem("new-place");
 const addPopup = document.querySelector(".popup_type_new-card");
 
 const cardNameInput = addForm.elements.namedItem("place-name");
@@ -170,7 +172,7 @@ urlInput.addEventListener("input", () => {
   validateForm(addForm, submitAddButton, urlInput);
 });
 
-addProfileButton = document.querySelector(".profile__add-button");
+const addProfileButton = document.querySelector(".profile__add-button");
 addProfileButton.addEventListener("click", () => {
   hideInputError(cardNameInput, cardNameInput.nextElementSibling);
   hideInputError(urlInput, urlInput.nextElementSibling);
