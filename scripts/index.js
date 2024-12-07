@@ -48,6 +48,12 @@ popups.forEach((element) => {
   console.log(element)
   document.addEventListener("keydown", closeByEsc);
   element.classList.add("popup_is-animated");
+
+  element.addEventListener('click', function(event) {
+    if (event.target === event.currentTarget) {
+      element.classList.toggle("popup_is-opened");
+    }
+  });
 });
 
 // ------------------------------ CARDS ----------------------------------
