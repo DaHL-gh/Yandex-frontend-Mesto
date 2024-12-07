@@ -47,17 +47,23 @@
             <input
               type="text"
               name="name"
+              minlength="2"
+              maxlength="40"
               class="popup__input popup__input_type_name"
               placeholder="Имя"
               required
             />
+            <span class="popup__error-message"></span>
             <input
               type="text"
               name="description"
+              minlength="2" 
+              maxlength="200" 
               class="popup__input popup__input_type_description"
               placeholder="Занятие"
               required
             />
+            <span class="popup__error-message"></span>
             <button type="submit" name="submit-button" class="button popup__button">
               Сохранить
             </button>
