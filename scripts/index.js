@@ -1,7 +1,3 @@
-// @todo: Функция создания карточки
-
-// @todo: Функция удаления карточки
-
 function togglePopup(popupClass) {
   document.querySelector(popupClass).classList.toggle("popup_is-opened");
 }
@@ -69,13 +65,12 @@ initialCards.forEach((item) => addCard(item.name, item.link));
 
 // -------------------------- EDIT POP-UP -------------------------------
 
+editForm = document.forms.edit-profile
 editPopup = document.querySelector(".popup_type_edit");
 editPopup.classList.add("popup_is-animated");
 
-const nameInput = editPopup.querySelector(".popup__input_type_name");
-const descriptionInput = editPopup.querySelector(
-  ".popup__input_type_description"
-);
+const nameInput = editForm.elements.name;
+const descriptionInput = editForm.elements.description;
 
 editProfileButton = document.querySelector(".profile__edit-button");
 editProfileButton.addEventListener("click", () => {
@@ -92,7 +87,7 @@ closeEditButton.addEventListener("click", () => {
   togglePopup(".popup_type_edit");
 });
 
-const submitEditButton = editPopup.querySelector(".popup__button");
+const submitEditButton = editForm.elements.submit-button;
 submitEditButton.addEventListener("click", (event) => {
   if (!!inputInput.value && !!descriptionInput.value) {
     event.preventDefault();
